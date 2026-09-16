@@ -1,0 +1,15 @@
+title: AssumeRole from unfamiliar IP correlated with endpoint process
+id: cloud-endpoint-assume-role-correlation
+status: experimental
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventName: AssumeRole
+  endpoint_context:
+    userAgent: simulated-edr-process-match
+  condition: selection and endpoint_context
+level: high
+falsepositives:
+  - Approved VPN or proxy egress addresses
